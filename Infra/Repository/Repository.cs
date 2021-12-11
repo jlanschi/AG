@@ -25,11 +25,36 @@ namespace Autoglass.Infra.Repository
                 return query.ToList();
             return new List<T>();
         }
+        
 
         public void Inserir(T entity)
         {
             _appDbContext.Set<T>().Add(entity);
             _appDbContext.SaveChanges();
+        }
+
+        public void Editar(T entity)
+        {
+            var original = BuscarPorID(entity.Id);
+
+            if(original != null) 
+            { 
+                _appDbContext.Entry(original).CurrentValues.SetValues(entity);
+                _appDbContext.SaveChanges();
+            }
+
+
+        }
+
+        public void Excluir(int id) 
+        {
+            var original = BuscarPorID(id);
+
+            if (original != null)
+            {
+                original.Situacao = 0;
+                _appDbContext.SaveChanges();
+            }
         }
     }
 }

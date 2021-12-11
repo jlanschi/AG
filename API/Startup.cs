@@ -40,6 +40,9 @@ namespace API
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped(typeof(Fornecedor));
 
+            services.AddScoped(typeof(IRepository<Produto>), typeof(Repository<Produto>));
+            services.AddScoped(typeof(Produto));
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

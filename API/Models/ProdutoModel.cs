@@ -6,13 +6,13 @@ namespace Autoglass.API.Models
     {
         public int Id { get; set; }
         public string Descricao { get; set; }
-        public SituacaoProduto Situacao { get; set; }
+        public int Situacao { get; set; }
 
-        public string DataFabricacao { get; set; }
-        public string DataValidade { get; set; }
+        public System.DateTime DataFabricacao { get; set; }
+        public System.DateTime DataValidade { get; set; }
 
         //public DateTime DataFabricacao { get; set; }
         //public DateTime DataValidade { get; set; }
-        public FornecedorModel Fornecedor { get; set; }
+        public int IdFornecedor { get; set; }
     }
 }

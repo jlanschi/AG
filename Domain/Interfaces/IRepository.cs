@@ -16,8 +16,8 @@ namespace Autoglass.Domain.Interfaces
         //List<T> Listar(string descricao);
 
         void Inserir(T entity);
-        //void Editar(T entity) ;
-        //void Excluir(T entity);
+        void Editar(T entity) ;
+        void Excluir(int id);
 
     }
 }

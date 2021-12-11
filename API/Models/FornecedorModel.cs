@@ -8,5 +8,7 @@
 
         public string Tipo { get; set; }
 
+        public int Situacao { get; set; }
+
     }
 }

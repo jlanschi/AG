@@ -30,6 +30,13 @@ namespace Autoglass.API.Controllers
             return fornecedores;
         }
 
+        [HttpGet("{id}")]
+        public Fornecedor BuscarPorId(int id)
+        {
+            var fornecedor = _fornecedorRepository.BuscarPorID(id);
+            return fornecedor;
+        }
+
         // POST: api/ToDoItems
         [HttpPost]
         public IActionResult Post([FromBody] FornecedorModel item)
@@ -38,10 +45,37 @@ namespace Autoglass.API.Controllers
             {
                 Descricao = item.Descricao,
                 Cnpj = item.CNPJ,
-                Tipo = item.Tipo
+                Tipo = item.Tipo,
+                Situacao = item.Situacao
             };
 
             _fornecedorRepository.Inserir(fornecedor);
+
+            return Ok();
+        }
+
+        // POST: 
+        [HttpPatch("{id}")]
+        public IActionResult Patch(int id, [FromBody] FornecedorModel item)
+        {
+            var fornecedor = new Fornecedor()
+            {
+                Id = id,
+                Descricao = item.Descricao,
+                Cnpj = item.CNPJ,
+                Tipo = item.Tipo,
+                Situacao = item.Situacao
+            };
+
+            _fornecedorRepository.Editar(fornecedor);
+
+            return Ok();
+        }
+        // POST: 
+        [HttpPatch("{id}/Excluir")]
+        public IActionResult Patch(int id)
+        {
+            _fornecedorRepository.Excluir(id);
 
             return Ok();
         }
