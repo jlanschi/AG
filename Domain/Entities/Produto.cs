@@ -10,8 +10,33 @@ namespace Autoglass.Domain.Entities
     {
         public string Descricao { get; set; }
 
-        public DateTime DataFabricacao { get; set; }
-        public DateTime DataValidade { get; set; }
+        private DateTime _dataFabricacao;
+        private DateTime _dataValidade;
+
+        public DateTime DataFabricacao 
+        {
+          get { return _dataFabricacao; } 
+            
+          set 
+            {
+                if (ValidaData(value, _dataValidade))
+                    { _dataFabricacao = value; }
+                else
+                    { throw new ArgumentException("Data de Fabricação deve ser menor que a data de Validade."); }
+            } 
+        }
+        public DateTime DataValidade 
+        {
+            get { return _dataValidade; }
+
+            set
+            {
+                if (ValidaData(_dataFabricacao, value))
+                { _dataValidade = value; }
+                else
+                { throw new ArgumentException("Data de Validade deve ser maior que a data de Fabricação."); }
+            }
+        }
         public int IdFornecedor { get; set; }
 
         public Produto() 
@@ -26,6 +51,10 @@ namespace Autoglass.Domain.Entities
             IdFornecedor = idFornecedor;
         }
 
+        private bool ValidaData(DateTime fabricacao, DateTime validade) 
+        {
+            return fabricacao < validade;
+        }
 
     }
 }

@@ -13,10 +13,11 @@ namespace Autoglass.Infra.Repository
 
         public Repository(AppDbContext appDbContext) { _appDbContext = appDbContext; }
 
-        public  T BuscarPorID(int id) 
+        public T BuscarPorID(int id)
         {
             return _appDbContext.Set<T>().FirstOrDefault(e => e.Id == id);
         }
+
 
         public List<T> Listar()
         {

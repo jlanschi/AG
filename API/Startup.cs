@@ -36,7 +36,9 @@ namespace API
             var connection=Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<AppDbContext>(options => options.UseSqlite(connection));
 
-            services.AddScoped(typeof(IRepository<Fornecedor>),typeof(Repository<Fornecedor>));
+            //services.AddScoped(typeof(IRepository<Fornecedor>),typeof(Repository<Fornecedor>));
+            //services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped(typeof(IFornecedorRepository), typeof(FornecedorRepository));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped(typeof(Fornecedor));
 

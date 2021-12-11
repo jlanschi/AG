@@ -34,20 +34,30 @@ namespace Autoglass.API.Controllers
             return produto;
         }
 
-        // POST: api/ToDoItems
+        
         [HttpPost]
         public IActionResult Post([FromBody] ProdutoModel item)
         {
-            var produto = new Produto()
+            //validacao de data no domain vai disparar exceção. vou tratar aqui.
+            try {
+                var produto = new Produto()
+                {
+                    Descricao = item.Descricao,
+                    DataValidade = item.DataValidade,
+                    DataFabricacao = item.DataFabricacao,
+                    Situacao = item.Situacao
+                };
+
+                _produtoRepository.Inserir(produto); 
+            
+            }
+            catch (System.Exception e)
             {
-                Descricao = item.Descricao,
-                DataValidade = item.DataValidade,
-                DataFabricacao = item.DataFabricacao,   
-                Situacao = item.Situacao
-            };
-
-            _produtoRepository.Inserir(produto);
-
+                string errorMessage = e.Message;
+                Response.Headers.Add("X-Error",errorMessage);
+                return BadRequest();
+            }
+                
             return Ok();
         }
 
@@ -55,16 +65,27 @@ namespace Autoglass.API.Controllers
         [HttpPatch("{id}")]
         public IActionResult Patch(int id, [FromBody] ProdutoModel item)
         {
-            var produto = new Produto()
+            //validacao de data no domain vai disparar exceção. vou tratar aqui.
+            try
             {
-                Id = id,
-                Descricao = item.Descricao,
-                DataValidade = item.DataValidade,
-                DataFabricacao = item.DataFabricacao,
-                Situacao = item.Situacao
-            };
 
-            _produtoRepository.Editar(produto);
+                var produto = new Produto()
+                {
+                    Id = id,
+                    Descricao = item.Descricao,
+                    DataValidade = item.DataValidade,
+                    DataFabricacao = item.DataFabricacao,
+                    Situacao = item.Situacao
+                };
+
+                _produtoRepository.Editar(produto);
+            }
+            catch (System.Exception e)
+            {
+                string errorMessage = e.Message;
+                Response.Headers.Add("X-Error", errorMessage);
+                return BadRequest();
+            }
 
             return Ok();
         }

@@ -15,9 +15,11 @@ namespace Autoglass.API.Controllers
     {        
 
         private readonly Fornecedor _fornecedor;
-        private readonly IRepository<Fornecedor> _fornecedorRepository;
+        //private readonly IRepository<Fornecedor> _fornecedorRepository;
+        private readonly IFornecedorRepository _fornecedorRepository;
 
-        public FornecedorController(Fornecedor fornecedor, IRepository<Fornecedor> fornecedorRepository) 
+        //public FornecedorController(Fornecedor fornecedor, IRepository<Fornecedor> fornecedorRepository)
+        public FornecedorController(Fornecedor fornecedor, IFornecedorRepository fornecedorRepository)
         { 
             _fornecedor = fornecedor;
             _fornecedorRepository = fornecedorRepository;
@@ -35,6 +37,13 @@ namespace Autoglass.API.Controllers
         {
             var fornecedor = _fornecedorRepository.BuscarPorID(id);
             return fornecedor;
+        }
+
+        [HttpGet("busca/{descricao}")]
+        public IList<Fornecedor> BuscarPorDescricao(string descricao)
+        {
+            var fornecedores = _fornecedorRepository.BuscarPorDescricao(descricao);
+            return fornecedores;
         }
 
         // POST: api/ToDoItems
