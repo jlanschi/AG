@@ -10,7 +10,7 @@ namespace Autoglass.Infra.Context
 
         }
 
-        public DbSet<Fornecedor> Fornecedores { get; set; }
-        public DbSet<Produto> Produtos { get; set; }
+        public DbSet<Fornecedor> Fornecedor { get; set; }
+        public DbSet<Produto> Produto { get; set; }
     }
 }

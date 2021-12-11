@@ -11,6 +11,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Sqlite;
+using Autoglass.Infra.Context;
+using Autoglass.Infra.Repository;
+using Autoglass.Domain.Interfaces;
+using Autoglass.Domain.Entities;
+
 
 namespace API
 {
@@ -26,11 +33,17 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var connection=Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<AppDbContext>(options => options.UseSqlite(connection));
+
+            services.AddScoped(typeof(IRepository<Fornecedor>),typeof(Repository<Fornecedor>));
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped(typeof(Fornecedor));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Autoglass.API", Version = "v1" });
             });
         }
 

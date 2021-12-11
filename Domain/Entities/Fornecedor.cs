@@ -11,6 +11,13 @@ namespace Autoglass.Domain.Entities
         public string Descricao { get; set; }
         public string Cnpj { get; set; }
 
+        public string Tipo { get; set; }
+
+        public Fornecedor()
+        {
+
+        }
+
         public Fornecedor(string descricao, string cNPJ) 
         { 
             Descricao = descricao;

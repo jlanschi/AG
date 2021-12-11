@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace Autoglass.Domain.Interfaces
 {
-    public interface IRepository
+    public interface IRepository<T> where T : class
     {
-        T BuscarPorID<T>(int id) where T:IBaseEntity ;
-        T BuscarPorDescricao<T>(string descricao) where T : IBaseEntity;
+        T BuscarPorID(int id);
+        //T BuscarPorDescricao(string descricao);
 
-        List<T> List<T>() where T : IBaseEntity;
+        List<T> Listar();
 
-        List<T> List<T> (string descricao) where T : IBaseEntity;
+        //List<T> Listar(string descricao);
 
-        void Inserir<T>(T entity) where T : IBaseEntity;
-        void Editar<T>(T entity) where T : IBaseEntity;
-        void Excluir<T>(T entity) where T : IBaseEntity;
+        void Inserir(T entity);
+        //void Editar(T entity) ;
+        //void Excluir(T entity);
 
     }
 }
