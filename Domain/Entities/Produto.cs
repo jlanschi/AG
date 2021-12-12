@@ -42,7 +42,7 @@ namespace Autoglass.Domain.Entities
         public Produto() 
         { }
 
-        public Produto(string descricao, int situacao, DateTime dataFabricacao, DateTime dataValidade, int idFornecedor) 
+        public Produto(string descricao, DateTime dataFabricacao, DateTime dataValidade, int idFornecedor) 
         { 
             Descricao = descricao;
             Situacao = 1; //Ativo
@@ -53,7 +53,19 @@ namespace Autoglass.Domain.Entities
 
         private bool ValidaData(DateTime fabricacao, DateTime validade) 
         {
-            return fabricacao < validade;
+            bool retorno = true;
+
+            if (fabricacao != DateTime.MinValue && validade != DateTime.MinValue)
+            { retorno = fabricacao < validade; }
+            else { retorno = true; }
+
+            return retorno;
+        }
+
+        public bool MarcarInativo() 
+        {
+            Situacao = 0; //inativo
+            return true;
         }
 
     }

@@ -47,15 +47,15 @@ namespace Autoglass.Infra.Repository
 
         }
 
-        public void Excluir(int id) 
+        /*public void Excluir(int id) 
         {
             var original = BuscarPorID(id);
 
             if (original != null)
             {
-                original.Situacao = 0;
+                original.Situacao = 0; //inativo
                 _appDbContext.SaveChanges();
             }
-        }
+        }*/
     }
 }

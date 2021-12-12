@@ -12,9 +12,9 @@ namespace Autoglass.API.Controllers
     public class ProdutoController : Controller
     {
         private readonly Produto _produto;
-        private readonly IRepository<Produto> _produtoRepository;
+        private readonly IProdutoRepository _produtoRepository;
 
-        public ProdutoController(Produto produto, IRepository<Produto> produtoRepository)
+        public ProdutoController(Produto produto, IProdutoRepository produtoRepository)
         {
             _produto = produto;
             _produtoRepository = produtoRepository;
@@ -40,13 +40,7 @@ namespace Autoglass.API.Controllers
         {
             //validacao de data no domain vai disparar exceção. vou tratar aqui.
             try {
-                var produto = new Produto()
-                {
-                    Descricao = item.Descricao,
-                    DataValidade = item.DataValidade,
-                    DataFabricacao = item.DataFabricacao,
-                    Situacao = item.Situacao
-                };
+                var produto = new Produto(item.Descricao, item.DataFabricacao, item.DataValidade, item.IdFornecedor);
 
                 _produtoRepository.Inserir(produto); 
             
@@ -69,16 +63,15 @@ namespace Autoglass.API.Controllers
             try
             {
 
-                var produto = new Produto()
-                {
-                    Id = id,
-                    Descricao = item.Descricao,
-                    DataValidade = item.DataValidade,
-                    DataFabricacao = item.DataFabricacao,
-                    Situacao = item.Situacao
-                };
+                var original = _produtoRepository.BuscarPorID(id);
 
-                _produtoRepository.Editar(produto);
+                original.Descricao = item.Descricao;
+                original.DataValidade = item.DataValidade;
+                original.DataFabricacao = item.DataFabricacao;
+                original.IdFornecedor = item.IdFornecedor;
+                
+
+                _produtoRepository.Editar(original);
             }
             catch (System.Exception e)
             {

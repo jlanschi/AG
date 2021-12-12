@@ -7,9 +7,9 @@ using Autoglass.Domain.Entities;
 
 namespace Autoglass.Domain.Interfaces
 {
-    public interface IFornecedorRepository : IRepository<Fornecedor> 
+    public interface IProdutoRepository : IRepository<Produto>
     {
-        public List<Fornecedor> BuscarPorParametros(string descricao);
+        public List<Produto> BuscarPorParametros(string descricao);
 
         public void Excluir(int id);
     }

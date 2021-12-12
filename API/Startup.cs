@@ -38,11 +38,12 @@ namespace API
 
             //services.AddScoped(typeof(IRepository<Fornecedor>),typeof(Repository<Fornecedor>));
             //services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-            services.AddScoped(typeof(IFornecedorRepository), typeof(FornecedorRepository));
+            services.AddScoped(typeof(IFornecedorRepository), typeof(FornecedorRepository));            
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped(typeof(Fornecedor));
 
-            services.AddScoped(typeof(IRepository<Produto>), typeof(Repository<Produto>));
+            //services.AddScoped(typeof(IRepository<Produto>), typeof(Repository<Produto>));
+            services.AddScoped(typeof(IProdutoRepository), typeof(ProdutoRepository));
             services.AddScoped(typeof(Produto));
 
             services.AddControllers();

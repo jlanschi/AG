@@ -14,16 +14,20 @@ namespace Autoglass.Domain.Entities
         public string Tipo { get; set; }
 
 
-        public Fornecedor()
-        {
+        public Fornecedor() { }
 
-        }
-
-        public Fornecedor(string descricao, string cNPJ) 
+        public Fornecedor(string descricao, string cNPJ, string tipo) 
         { 
             Descricao = descricao;
             Cnpj = cNPJ;
+            Tipo = tipo;
             Situacao = 1; //ativo
+        }
+
+        public bool MarcarInativo() 
+        {
+            Situacao = 0; //inativo
+            return true;
         }
     }
 }

@@ -6,12 +6,12 @@ namespace Autoglass.API.Models
     public class ProdutoModel
     {
         [Required]
-        public int Id { get; set; }
+        public int Id { get; protected set; }
         [Required]
         public string Descricao { get; set; }
 
         [Required]
-        public int Situacao { get; set; }
+        public int Situacao { get; protected set; }
 
         [Required]
         public System.DateTime DataFabricacao { get; set; }

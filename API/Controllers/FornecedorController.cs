@@ -42,7 +42,7 @@ namespace Autoglass.API.Controllers
         [HttpGet("busca/{descricao}")]
         public IList<Fornecedor> BuscarPorDescricao(string descricao)
         {
-            var fornecedores = _fornecedorRepository.BuscarPorDescricao(descricao);
+            var fornecedores = _fornecedorRepository.BuscarPorParametros(descricao);
             return fornecedores;
         }
 
@@ -50,13 +50,7 @@ namespace Autoglass.API.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] FornecedorModel item)
         {
-            var fornecedor = new Fornecedor()
-            {
-                Descricao = item.Descricao,
-                Cnpj = item.CNPJ,
-                Tipo = item.Tipo,
-                Situacao = item.Situacao
-            };
+            var fornecedor = new Fornecedor(item.Descricao, item.CNPJ, item.Tipo);           
 
             _fornecedorRepository.Inserir(fornecedor);
 
@@ -67,16 +61,14 @@ namespace Autoglass.API.Controllers
         [HttpPatch("{id}")]
         public IActionResult Patch(int id, [FromBody] FornecedorModel item)
         {
-            var fornecedor = new Fornecedor()
-            {
-                Id = id,
-                Descricao = item.Descricao,
-                Cnpj = item.CNPJ,
-                Tipo = item.Tipo,
-                Situacao = item.Situacao
-            };
 
-            _fornecedorRepository.Editar(fornecedor);
+            var original = _fornecedorRepository.BuscarPorID(id);
+
+            original.Descricao= item.Descricao;
+            original.Cnpj = item.CNPJ;
+            original.Tipo = item.Tipo;
+
+            _fornecedorRepository.Editar(original);
 
             return Ok();
         }

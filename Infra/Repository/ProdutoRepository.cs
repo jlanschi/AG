@@ -7,19 +7,19 @@ using Autoglass.Infra.Context;
 
 namespace Autoglass.Infra.Repository
 {
-    public class FornecedorRepository:Repository<Fornecedor>,IFornecedorRepository
+    public class ProdutoRepository : Repository<Produto>, IProdutoRepository
     {
-        public FornecedorRepository(AppDbContext appDbContext) : base(appDbContext)
+        public ProdutoRepository(AppDbContext appDbContext) : base(appDbContext)
         {
         }
 
-        public List<Fornecedor> BuscarPorParametros(string descricao)
+        public List<Produto> BuscarPorParametros(string descricao)
         {
             //var query = _appDbContext.Set<Fornecedor>().Where(x => x.Descricao == descricao);
-            var query = _appDbContext.Set<Fornecedor>().Where(x => EF.Functions.Like(x.Descricao, "%"+descricao.Trim()+"%"));
+            var query = _appDbContext.Set<Produto>().Where(x => EF.Functions.Like(x.Descricao, "%" + descricao.Trim() + "%"));
             if (query.Any())
                 return query.ToList();
-            return new List<Fornecedor>();
+            return new List<Produto>();
         }
 
         public void Excluir(int id)

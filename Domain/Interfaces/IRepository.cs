@@ -9,15 +9,12 @@ namespace Autoglass.Domain.Interfaces
     public interface IRepository<T> where T : class
     {
         T BuscarPorID(int id);
-        //T BuscarPorDescricao(string descricao);
 
         List<T> Listar();
 
-        //List<T> Listar(string descricao);
-
         void Inserir(T entity);
         void Editar(T entity) ;
-        void Excluir(int id);
+        //void Excluir(int id);
 
     }
 }
