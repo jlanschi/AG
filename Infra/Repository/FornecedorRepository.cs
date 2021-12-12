@@ -13,15 +13,6 @@ namespace Autoglass.Infra.Repository
         {
         }
 
-        public List<Fornecedor> BuscarPorParametros(string descricao)
-        {
-            //var query = _appDbContext.Set<Fornecedor>().Where(x => x.Descricao == descricao);
-            var query = _appDbContext.Set<Fornecedor>().Where(x => EF.Functions.Like(x.Descricao, "%"+descricao.Trim()+"%"));
-            if (query.Any())
-                return query.ToList();
-            return new List<Fornecedor>();
-        }
-
         public void Excluir(int id)
         {
             var original = BuscarPorID(id);

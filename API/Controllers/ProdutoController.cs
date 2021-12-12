@@ -34,7 +34,14 @@ namespace Autoglass.API.Controllers
             return produto;
         }
 
-        
+        [HttpPost("busca")]
+        public IList<Produto> BuscarPorParametros([FromBody] ParametrosModel parametros)
+        {
+            var produtos = _produtoRepository.BuscarPorParametros(parametros.descricao, parametros.fornecedor, parametros.pageSize, parametros.page);
+            return produtos;
+        }
+
+
         [HttpPost]
         public IActionResult Post([FromBody] ProdutoModel item)
         {

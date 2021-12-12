@@ -39,13 +39,6 @@ namespace Autoglass.API.Controllers
             return fornecedor;
         }
 
-        [HttpGet("busca/{descricao}")]
-        public IList<Fornecedor> BuscarPorDescricao(string descricao)
-        {
-            var fornecedores = _fornecedorRepository.BuscarPorParametros(descricao);
-            return fornecedores;
-        }
-
         // POST: api/ToDoItems
         [HttpPost]
         public IActionResult Post([FromBody] FornecedorModel item)

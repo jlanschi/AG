@@ -9,7 +9,7 @@ namespace Autoglass.Domain.Interfaces
 {
     public interface IProdutoRepository : IRepository<Produto>
     {
-        public List<Produto> BuscarPorParametros(string descricao);
+        public List<Produto> BuscarPorParametros(string descricao, int fornecedor, int pageSize, int page);
 
         public void Excluir(int id);
     }

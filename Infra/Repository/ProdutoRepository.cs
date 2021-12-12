@@ -13,12 +13,18 @@ namespace Autoglass.Infra.Repository
         {
         }
 
-        public List<Produto> BuscarPorParametros(string descricao)
+        public List<Produto> BuscarPorParametros(string descricao, int fornecedor, int pageSize, int page)
         {
-            //var query = _appDbContext.Set<Fornecedor>().Where(x => x.Descricao == descricao);
-            var query = _appDbContext.Set<Produto>().Where(x => EF.Functions.Like(x.Descricao, "%" + descricao.Trim() + "%"));
+
+            IQueryable<Produto> query = _appDbContext.Set<Produto>();
+
+            //query = query.Where(x => x.Descricao == descricao);
+            if (!string.IsNullOrEmpty(descricao)) 
+                query = query.Where(x => EF.Functions.Like(x.Descricao,"%"+descricao.Trim()+"%"));
+            if (fornecedor != null && fornecedor>0)
+                query = query.Where(x => x.IdFornecedor == fornecedor);
             if (query.Any())
-                return query.ToList();
+                return query.Skip((page - 1) * pageSize).Take(pageSize).ToList();
             return new List<Produto>();
         }
 
